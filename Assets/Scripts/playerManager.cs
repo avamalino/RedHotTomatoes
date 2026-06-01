@@ -1,12 +1,14 @@
 using System.Collections;
 using UnityEngine;
-public class playerManager : MonoBehaviour
+using UnityEngine.EventSystems;
+public class PlayerManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public GameObject player;
     private string currentKey;
     Vector3 playerStartPos;
     private bool canPress = true;
+    public bool isPressed = false;
     void Start()
     {
         GetComponent<Transform>().position = playerStartPos;
@@ -50,6 +52,13 @@ public class playerManager : MonoBehaviour
     void resetPosition()
     {
         player.transform.position = playerStartPos;
+    }
+
+    public bool OnPointerDown(PointerEventData eventData)
+    {
+        isPressed = true;
+        Debug.Log("Button Pressed");
+        return isPressed;
     }
     
     //make sure can't press A or D multiple times in a row, then resets player position to start

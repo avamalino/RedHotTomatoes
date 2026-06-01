@@ -349,30 +349,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 813120463}
-  - component: {fileID: 813120464}
+  - component: {fileID: 813120462}
   m_Layer: 0
-  m_Name: TomatoManager
+  m_Name: tomatoManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &813120463
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 813120461}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.94039, y: -0.41286, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &813120464
+--- !u!114 &813120462
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -383,53 +368,21 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e1cd0e2bab18a94e80595eb506b255f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TomatoController1
+  m_EditorClassIdentifier: Assembly-CSharp::tomatoController
   destPosition: {x: 0, y: 0, z: 0}
   player: {fileID: 1834971649}
-  playerManager: {fileID: 1465184115}
   tomatoPrefab: {fileID: 8919071558310528045, guid: 90c2e06f6dffdc14280e77c7cfec394b, type: 3}
   jsonFile: {fileID: 4900000, guid: 8a07818f90418204c84d28d872e6385e, type: 3}
---- !u!1 &1465184114
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1465184116}
-  - component: {fileID: 1465184115}
-  m_Layer: 0
-  m_Name: PlayerController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1465184115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1465184114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c4c9fd579af7df4aa27eb0eebbc48f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::playerManager
-  player: {fileID: 1834971649}
-  isPressed: 0
---- !u!4 &1465184116
+--- !u!4 &813120463
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1465184114}
+  m_GameObject: {fileID: 813120461}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.62151, y: -1.20286, z: 0}
+  m_LocalPosition: {x: 0.94039, y: -0.41286, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -497,7 +450,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   player: {fileID: 1834971649}
-  isPressed: 0
 --- !u!212 &1834971652
 SpriteRenderer:
   serializedVersion: 2
@@ -545,7 +497,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -581,4 +533,3 @@ SceneRoots:
   - {fileID: 1834971653}
   - {fileID: 1660965953}
   - {fileID: 813120463}
-  - {fileID: 1465184116}

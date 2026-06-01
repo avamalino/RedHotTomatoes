@@ -1,14 +1,2 @@
 fileFormatVersion: 2
 guid: 6e1cd0e2bab18a94e80595eb506b255f
-MonoImporter:
-  externalObjects: {}
-  serializedVersion: 2
-  defaultReferences:
-  - player: {instanceID: 0}
-  - tomatoPrefab: {instanceID: 0}
-  - jsonFile: {fileID: 4900000, guid: 8a07818f90418204c84d28d872e6385e, type: 3}
-  executionOrder: 0
-  icon: {instanceID: 0}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
