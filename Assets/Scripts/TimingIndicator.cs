@@ -9,7 +9,7 @@ public class TimingIndicator : MonoBehaviour
     void Update()
     {
         float minScale = 0.05f;
-        float maxScale = 0.8f;
+        float maxScale = 0.3f;
 
         float percentRemaining = Mathf.Clamp01((hitTime - Time.time) / travelTime);
         float scale = Mathf.Lerp(minScale, maxScale, percentRemaining);

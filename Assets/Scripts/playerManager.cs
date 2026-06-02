@@ -62,7 +62,7 @@ public class PlayerManager : MonoBehaviour
     {
         canPress = false;
         movePlayer(currentKey);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.15f);
         resetPosition();
         canPress = true;
     }

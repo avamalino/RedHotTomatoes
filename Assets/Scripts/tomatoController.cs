@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,9 +20,17 @@ public class TomatoController : MonoBehaviour
     private const float tomatoTravelTime = 1.49f; //time it takes for tomato to reach player from each side;
 
     // good bad perfect hits
-    private const float good = 0.2f;
-    private const float perfect = 0.05f;
-    private const float bad = 0.4f;
+    private const float good = 0.15f;
+    private const float perfect = 0.075f;
+    private const float bad = 0.2f;
+
+    private int combo = 0;
+    public TMPro.TextMeshProUGUI comboText;
+
+    public GameObject perfectWord;
+    public GameObject goodWord;
+    public GameObject badWord;
+    public GameObject missWord;
 
     public TextAsset jsonFile;
 
@@ -57,6 +66,7 @@ public class TomatoController : MonoBehaviour
         if (playerManager.isPressed)
         {
             CheckHit();
+            comboText.text = "Combo: " + combo;
             playerManager.isPressed = false;
         }
     }
@@ -158,20 +168,28 @@ public class TomatoController : MonoBehaviour
 
         if (closestDifference <= perfect)
         {
+            combo++;
             Debug.Log("Perfect!");
+            StartCoroutine(PGB(perfectWord));
         }
         else if (closestDifference <= good)
         {
+            combo++;
             Debug.Log("Good!");
+            StartCoroutine(PGB(goodWord));
         }
         else if (closestDifference <= bad)
         {
+            combo = 0;
             Debug.Log("Bad!");
+            StartCoroutine(PGB(badWord));
         }
         else
         {
+            combo = 0;
             Debug.Log("Miss!");
-            return;
+            StartCoroutine(PGB(missWord));
+            //return;
         }
         if (closestTomato != null)
         {
@@ -180,5 +198,27 @@ public class TomatoController : MonoBehaviour
             Destroy(closestTomato.gameObject);
             Destroy(closestTomato.timingCircle.gameObject);
         }
+    }
+
+    IEnumerator PGB(GameObject word)
+    {
+        GameObject spawnedWord = Instantiate(word, new Vector3(destPosition.x, destPosition.y + 4, destPosition.z), Quaternion.identity);
+        float elapsed = 0f;
+        float fadeDuration = 1f;
+
+        SpriteRenderer sr = spawnedWord.GetComponent<SpriteRenderer>();
+
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.deltaTime;
+
+            Color c = sr.color;
+            c.a = 1f - (elapsed / fadeDuration);
+            sr.color = c;
+            //float alpha = Mathf.Clamp01(elapsed / fadeDuration);
+            yield return null;
+        }
+        yield return new WaitForSeconds(0.3f);
+        Destroy(spawnedWord);
     }
 }
