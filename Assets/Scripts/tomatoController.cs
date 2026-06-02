@@ -178,6 +178,7 @@ public class TomatoController : MonoBehaviour
             closestTomato.wasDodged = true;
             tomatoList.Remove(closestTomato.gameObject);
             Destroy(closestTomato.gameObject);
+            Destroy(closestTomato.timingCircle.gameObject);
         }
     }
 }
