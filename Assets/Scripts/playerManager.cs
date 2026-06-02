@@ -20,16 +20,19 @@ public class PlayerManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A) && canPress)
         {
             currentKey = "A";
+            isPressed = true;
             StartCoroutine(KeysPressed(currentKey));
         }
         if (Input.GetKeyDown(KeyCode.D) && canPress)
         {
             currentKey = "D";
+            isPressed = true;
             StartCoroutine(KeysPressed(currentKey));
         }
         if (Input.GetKeyDown(KeyCode.S) && canPress)
         {
             currentKey = "S";
+            isPressed = true;
             StartCoroutine(KeysPressed(currentKey));
         }
     }
@@ -52,13 +55,6 @@ public class PlayerManager : MonoBehaviour
     void resetPosition()
     {
         player.transform.position = playerStartPos;
-    }
-
-    public bool OnPointerDown(PointerEventData eventData)
-    {
-        isPressed = true;
-        Debug.Log("Button Pressed");
-        return isPressed;
     }
     
     //make sure can't press A or D multiple times in a row, then resets player position to start

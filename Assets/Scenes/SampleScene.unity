@@ -388,6 +388,7 @@ MonoBehaviour:
   player: {fileID: 1834971649}
   playerManager: {fileID: 1465184115}
   tomatoPrefab: {fileID: 8919071558310528045, guid: 90c2e06f6dffdc14280e77c7cfec394b, type: 3}
+  timingCirclePrefab: {fileID: 8524725230463868331, guid: ac7f094a5ce6f3449a2bf8592c9ca313, type: 3}
   jsonFile: {fileID: 4900000, guid: 8a07818f90418204c84d28d872e6385e, type: 3}
 --- !u!1 &1465184114
 GameObject:
@@ -545,10 +546,10 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8113208, g: 0, b: 0.7517528, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -13,13 +13,15 @@ public class TomatoController : MonoBehaviour
     private List<GameObject> tomatoList = new List<GameObject>();
     private List<float> noteTimes = new List<float>();
 
+    public GameObject timingCirclePrefab;
+
     private float timer;
     private const float tomatoTravelTime = 1.49f; //time it takes for tomato to reach player from each side;
 
     // good bad perfect hits
-    private const float good = 0.8f;
-    private const float perfect = 0.4f;
-    private const float bad = 1.2f;
+    private const float good = 0.2f;
+    private const float perfect = 0.05f;
+    private const float bad = 0.4f;
 
     public TextAsset jsonFile;
 
@@ -52,26 +54,11 @@ public class TomatoController : MonoBehaviour
         songTime = Time.time;
 
         spawnNotes();
-        CheckHit();
-
-        //timer += Time.deltaTime;
-        //float nextNoteTime = noteTimes[currentNoteIndex];
-        ////create tomato every three seconds
-        //if (timer >= nextNoteTime)
-        //{
-        //    randomX = Random.Range(0, 2) == 0 ? -4f : 4f;
-        //    Debug.Log("this note time: " + nextNoteTime);
-        //    GameObject newTomato = Instantiate(tomatoPrefab, new Vector3(randomX, -5, 0), Quaternion.identity);
-
-        //    //attach the tomato script (which moves tomato towards player) to the new tomato
-        //    tomatoScript = newTomato.GetComponent<Tomato>();
-        //    tomatoScript.target = destPosition;
-        //    tomatoList.Add(newTomato);
-
-        //   currentNoteIndex++;
-        //    timer = 0f;
-        //}
-
+        if (playerManager.isPressed)
+        {
+            CheckHit();
+            playerManager.isPressed = false;
+        }
     }
 
     void spawnNotes()
@@ -95,11 +82,19 @@ public class TomatoController : MonoBehaviour
         randomX = Random.Range(0, 2) == 0 ? -4f : 4f;
         if (songTime >= noteHitTime - tomatoTravelTime)
         {
+            //Create tomato
             GameObject newTomato = Instantiate(tomatoPrefab, new Vector3(randomX, -5, 0), Quaternion.identity);
             Tomato tomatoScript = newTomato.GetComponent<Tomato>();
             tomatoScript.hitTime = noteHitTime;
             tomatoScript.target = destPosition;
             tomatoList.Add(newTomato);
+
+            //create timing circle
+            GameObject timingCircle = Instantiate(timingCirclePrefab, destPosition, Quaternion.identity);
+            TimingIndicator indicator = timingCircle.GetComponent<TimingIndicator>();
+            indicator.hitTime = noteHitTime;
+            tomatoScript.timingCircle = indicator;
+
             currentNoteIndex++;
         }
     }
@@ -127,51 +122,62 @@ public class TomatoController : MonoBehaviour
         }
 
         buttonPressTime = songTime;
+        tomatoList.RemoveAll(t => t == null);
+
 
         Tomato closestTomato = null;
         float closestDifference = Mathf.Infinity;
-
         foreach (GameObject tomatoObject in tomatoList)
         {
             if (tomatoObject == null)
             {
-                return;
+                Debug.LogError("2");
+
+                continue;
             }
 
             Tomato tomato = tomatoObject.GetComponent<Tomato>();
+            Debug.Log("creating new tomato");
+            Debug.Log("tomato was dodged: " + tomato.wasDodged);
 
+            if (tomato == null)
+            {
+                Debug.LogError("1");
+                return;
+            }
             float difference = Mathf.Abs(buttonPressTime - tomato.hitTime);
             Debug.Log("Difference: " + difference);
 
             if (difference < closestDifference)
             {
                 closestDifference = difference;
+                Debug.Log("Closest Difference: " + closestDifference);
                 closestTomato = tomato;
             }
+        }
 
-            if (closestDifference <= perfect)
-            {
-                Debug.Log("Perfect!");
-            }
-            else if (closestDifference <= good)
-            {
-                Debug.Log("Good!");
-            }
-            else if (closestDifference <= bad)
-            {
-                Debug.Log("Bad!");
-            }
-            else
-            {
-                Debug.Log("Miss!");
-                closestTomato.wasDodged = true;
-            }
-
-            if (closestTomato != null)
-            {
-                tomatoList.Remove(closestTomato.gameObject);
-                Destroy(closestTomato.gameObject);
-            }
+        if (closestDifference <= perfect)
+        {
+            Debug.Log("Perfect!");
+        }
+        else if (closestDifference <= good)
+        {
+            Debug.Log("Good!");
+        }
+        else if (closestDifference <= bad)
+        {
+            Debug.Log("Bad!");
+        }
+        else
+        {
+            Debug.Log("Miss!");
+            return;
+        }
+        if (closestTomato != null)
+        {
+            closestTomato.wasDodged = true;
+            tomatoList.Remove(closestTomato.gameObject);
+            Destroy(closestTomato.gameObject);
         }
     }
 }

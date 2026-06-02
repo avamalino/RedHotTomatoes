@@ -1,2 +1,16 @@
 fileFormatVersion: 2
 guid: 6e1cd0e2bab18a94e80595eb506b255f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - player: {instanceID: 0}
+  - playerManager: {instanceID: 0}
+  - tomatoPrefab: {fileID: 8919071558310528045, guid: 90c2e06f6dffdc14280e77c7cfec394b, type: 3}
+  - timingCirclePrefab: {fileID: 8524725230463868331, guid: ac7f094a5ce6f3449a2bf8592c9ca313, type: 3}
+  - jsonFile: {fileID: 4900000, guid: 8a07818f90418204c84d28d872e6385e, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
