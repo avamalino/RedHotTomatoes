@@ -17,40 +17,41 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) && canPress)
+        if (Input.GetKeyDown(KeyCode.Space) && canPress)
         {
-            currentKey = "A";
+            currentKey = "Space";
             isPressed = true;
             StartCoroutine(KeysPressed(currentKey));
         }
-        if (Input.GetKeyDown(KeyCode.D) && canPress)
-        {
-            currentKey = "D";
-            isPressed = true;
-            StartCoroutine(KeysPressed(currentKey));
-        }
-        if (Input.GetKeyDown(KeyCode.S) && canPress)
-        {
-            currentKey = "S";
-            isPressed = true;
-            StartCoroutine(KeysPressed(currentKey));
-        }
+        //if (Input.GetKeyDown(KeyCode.D) && canPress)
+        //{
+        //    currentKey = "D";
+        //    isPressed = true;
+        //    StartCoroutine(KeysPressed(currentKey));
+        //}
+        //if (Input.GetKeyDown(KeyCode.S) && canPress)
+        //{
+        //    currentKey = "S";
+        //    isPressed = true;
+        //    StartCoroutine(KeysPressed(currentKey));
+        //}
     }
 
     void movePlayer(string key)
     {
-        if (key == "A")
+        if (key == "Space")
         {
-            player.transform.position = new Vector3(player.transform.position.x - 1, player.transform.position.y, player.transform.position.z);
+            int X = Random.Range(0, 2) == 0 ? -1 : 1;
+            player.transform.position = new Vector3(X, player.transform.position.y, player.transform.position.z);
         }
-        if (key == "D")
-        {
-            player.transform.position = new Vector3(player.transform.position.x + 1, player.transform.position.y, player.transform.position.z);
-        }
-        if (key == "S")
-        {
-            player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - 3, player.transform.position.z);
-        }
+        //if (key == "D")
+        //{
+        //    player.transform.position = new Vector3(player.transform.position.x + 1, player.transform.position.y, player.transform.position.z);
+        //}
+        //if (key == "S")
+        //{
+        //    player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - 3, player.transform.position.z);
+        //}
     }
     void resetPosition()
     {
