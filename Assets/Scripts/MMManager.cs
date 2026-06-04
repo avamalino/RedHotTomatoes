@@ -41,6 +41,7 @@ public class MMManager : MonoBehaviour
                 PlayClicked();
                 break;
             case MMButtons.Credits:
+                Debug.Log("clicking credits button");
                 CreditsClicked();
                 break;
             case MMButtons.Quit:
@@ -50,6 +51,10 @@ public class MMManager : MonoBehaviour
                 Debug.LogError("Invalid button clicked: " + button.ToString());
                 break;
         }
+    }
+    public void ReturnToMM()
+    {
+        SceneManager.LoadScene(_sceneToLoadAfterClickingBack);
     }
 
     public void CreditsButtonClicked(CreditsBack button)
@@ -85,6 +90,7 @@ public class MMManager : MonoBehaviour
 
     public void OpenMenu(GameObject menu)
     {
+        Debug.Log("Opening menu: " + menu.name);
         _MainMenuContainer.SetActive(menu == _MainMenuContainer);
         _CreditsMenuContainer.SetActive(menu == _CreditsMenuContainer);
     }

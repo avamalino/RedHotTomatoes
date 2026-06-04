@@ -82,15 +82,15 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -3962807554240710951, guid: 21a24adf01be6d74fac9cacc8292c39a, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 7.2999997, y: 8.542453}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!114 &-3115522671702446602
 MonoBehaviour:
@@ -108,3 +108,4 @@ MonoBehaviour:
   hitTime: 0
   wasDodged: 0
   tomatoPrefab: {fileID: 8919071558310528045}
+  timingCircle: {fileID: 0}
