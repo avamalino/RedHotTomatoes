@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TomatoController : MonoBehaviour
 {
@@ -35,12 +36,14 @@ public class TomatoController : MonoBehaviour
     public TextAsset jsonFile;
 
     private float songTime;
-
+    private AudioSource audioSource;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         destPosition = player.transform.position;
 
+        audioSource = GetComponent<AudioSource>();
+        audioSource.Play();
         //read from json file to get note times and store them in a list (cause i dont fucking know how to read from json file in unity)
         Notes noteTime = JsonUtility.FromJson<Notes>(jsonFile.text);
 
@@ -48,6 +51,7 @@ public class TomatoController : MonoBehaviour
         {
             noteTimes.Add(note);
         }
+
     }
 
     private int currentNoteIndex = 0;
@@ -60,14 +64,18 @@ public class TomatoController : MonoBehaviour
         //call spawn notes
         //call check hit
 
-        songTime = Time.time;
-
+        songTime = audioSource.time; //was Time.time
         spawnNotes();
         if (playerManager.isPressed)
         {
             CheckHit();
             comboText.text = "Combo: " + combo;
             playerManager.isPressed = false;
+        }
+
+        if (!audioSource.isPlaying)
+        {
+            SceneManager.LoadScene("EndMenu");
         }
     }
 
@@ -95,6 +103,8 @@ public class TomatoController : MonoBehaviour
             //Create tomato
             GameObject newTomato = Instantiate(tomatoPrefab, new Vector3(randomX, -5, 0), Quaternion.identity);
             Tomato tomatoScript = newTomato.GetComponent<Tomato>();
+            SpriteRenderer sr = newTomato.GetComponent<SpriteRenderer>();
+            sr.sortingOrder = 10;
             tomatoScript.hitTime = noteHitTime;
             tomatoScript.target = destPosition;
             tomatoList.Add(newTomato);
@@ -103,6 +113,7 @@ public class TomatoController : MonoBehaviour
             GameObject timingCircle = Instantiate(timingCirclePrefab, destPosition, Quaternion.identity);
             TimingIndicator indicator = timingCircle.GetComponent<TimingIndicator>();
             indicator.hitTime = noteHitTime;
+            indicator.audioSource = audioSource;
             tomatoScript.timingCircle = indicator;
 
             currentNoteIndex++;
@@ -126,10 +137,10 @@ public class TomatoController : MonoBehaviour
         // remove tomato from list
         // destroy tomato
 
-        if (!playerManager.isPressed)
-        {
-            return;
-        }
+        //if (!playerManager.isPressed)
+        //{
+        //    return;
+        //}
 
         buttonPressTime = songTime;
         tomatoList.RemoveAll(t => t == null);
@@ -205,8 +216,11 @@ public class TomatoController : MonoBehaviour
         GameObject spawnedWord = Instantiate(word, new Vector3(destPosition.x, destPosition.y + 4, destPosition.z), Quaternion.identity);
         float elapsed = 0f;
         float fadeDuration = 1f;
-
+        Debug.Log("PGB START: " + word.name);
+        Debug.Log("SPAWN POSITION: " + destPosition);
         SpriteRenderer sr = spawnedWord.GetComponent<SpriteRenderer>();
+
+        sr.sortingOrder = 9999;
 
         while (elapsed < fadeDuration)
         {

@@ -5,6 +5,10 @@ public class PlayerManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public GameObject player;
+
+    public Sprite idleSprite;
+    public Sprite dodgeSprite;
+    private SpriteRenderer playerSprite;
     private string currentKey;
     Vector3 playerStartPos;
     private bool canPress = true;
@@ -12,6 +16,8 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         GetComponent<Transform>().position = playerStartPos;
+        playerSprite = player.GetComponent<SpriteRenderer>();
+        playerSprite.sprite = idleSprite;
     }
 
     // Update is called once per frame
@@ -39,11 +45,21 @@ public class PlayerManager : MonoBehaviour
 
     void movePlayer(string key)
     {
-        if (key == "Space")
-        {
+        //if (key == "Space")
+        //{
             int X = Random.Range(0, 2) == 0 ? -1 : 1;
-            player.transform.position = new Vector3(X, player.transform.position.y, player.transform.position.z);
-        }
+
+            playerSprite.sprite = dodgeSprite;
+            if (X > 0)
+            {
+                playerSprite.flipX = false; ;
+            }
+            else
+            {
+                playerSprite.flipX = true;
+            }
+                player.transform.position = new Vector3(X, player.transform.position.y, player.transform.position.z);
+        //}
         //if (key == "D")
         //{
         //    player.transform.position = new Vector3(player.transform.position.x + 1, player.transform.position.y, player.transform.position.z);
@@ -56,6 +72,8 @@ public class PlayerManager : MonoBehaviour
     void resetPosition()
     {
         player.transform.position = playerStartPos;
+        playerSprite.sprite = idleSprite;
+        playerSprite.flipX = false;
     }
     
     //make sure can't press A or D multiple times in a row, then resets player position to start
@@ -63,7 +81,7 @@ public class PlayerManager : MonoBehaviour
     {
         canPress = false;
         movePlayer(currentKey);
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.3f);
         resetPosition();
         canPress = true;
     }
